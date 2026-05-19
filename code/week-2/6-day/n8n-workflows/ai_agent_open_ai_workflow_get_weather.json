@@ -1,0 +1,175 @@
+{
+  "name": "AI Agent OpenAI",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a6fd769a-29c4-4d08-92d4-2bd910f2ee32",
+      "name": "When chat message received",
+      "webhookId": "318043aa-0837-41b4-a608-1b9bec95d6ee"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c1b0c5ea-ea13-4907-9c5a-e816081465a7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        368
+      ],
+      "id": "53c6b29a-2ecc-4cf9-a4c8-e3949333b7ef",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "6C7ehz0RioP5p7Q8",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        224
+      ],
+      "id": "89cf6686-2cff-4cf0-b720-683582b16b1a",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "url": "https://www.timeanddate.com/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        208
+      ],
+      "id": "1d2c1383-894d-499c-8b84-9e3130274582",
+      "name": "HTTP Request for get date"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Используй русские сервисы для получения информации",
+        "url": "=https://yandex.ru/pogoda/ru/saint-petersburg",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Name', ``, 'string') }}",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        208
+      ],
+      "id": "f46fe206-0639-4f97-a5dd-10bd4b7f49c5",
+      "name": "General HTTP request",
+      "notesInFlow": false
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request for get date": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "General HTTP request": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "17446fdc-c61f-49bd-b0f1-61d546a8571b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0b4d445667f2d4adc557e908f5e9df4375a7b03ccd03a384087fe102b7e43660"
+  },
+  "id": "jZUSu3GYiTuE57HP",
+  "tags": []
+}

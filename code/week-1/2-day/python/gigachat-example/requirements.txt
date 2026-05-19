@@ -1,0 +1,5 @@
+python-dotenv
+gigachat
+openai
+yandex-cloud-ml-sdk
+flask

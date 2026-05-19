@@ -1,0 +1,21 @@
+# Основные библиотеки для работы с LangChain
+langchain
+langgraph
+langsmith
+
+# Интеграция с различными AI моделями
+langchain-gigachat
+langchain-openai
+
+# Работа с векторными базами данных
+langchain-chroma
+
+# Работа с переменными окружения
+python-dotenv
+
+# Дополнительные инструменты LangChain
+langchain-community
+
+# Специализированные библиотеки для мультиагентных систем
+langgraph-supervisor
+langgraph-swarm

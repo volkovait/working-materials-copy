@@ -1,0 +1,62 @@
+# Зависимости — в образе ставятся через npm ci
+node_modules
+
+# Сборка — пересобирается в RUN npm run build
+dist
+build
+*.tsbuildinfo
+
+# Секреты и локальные переменные (в runtime передаются через -e / compose)
+.env
+.env.*
+!.env.example
+
+# Git и метаданные репозитория
+.git
+.gitattributes
+.gitignore
+
+# Документация и шаблоны, не нужные для сборки
+README.md
+*.md
+
+# IDE и ОС
+.idea
+.vscode
+.cursor
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Тесты и покрытие (не участвуют в production-сборке Nest по умолчанию)
+coverage
+.nyc_output
+**/*.spec.ts
+**/*.e2e-spec.ts
+test
+
+# Линтинг и форматирование (не нужны внутри образа для build)
+.eslintrc*
+.prettierrc*
+.prettierignore
+eslint.config.*
+
+# CI / хуки
+.github
+.husky
+
+# Логи и временные файлы
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+tmp
+temp
+
+# Docker (в контекст образа не попадают, уменьшают контекст при docker build)
+Dockerfile*
+docker-compose*.yml
+docker-compose*.yaml
+.dockerignore

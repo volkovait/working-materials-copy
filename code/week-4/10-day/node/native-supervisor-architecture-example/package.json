@@ -1,0 +1,19 @@
+{
+  "name": "native-supervisor-architecture-example",
+  "version": "1.0.0",
+  "description": "Учебный пример архитектуры Supervisor на LangGraph JS",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@langchain/core": "^1.0.1",
+    "@langchain/langgraph": "^1.2.1",
+    "@langchain/langgraph-supervisor": "^1.0.1",
+    "@langchain/openai": "^1.2.12",
+    "dotenv": "^16.4.7",
+    "langchain": "^1.2.30",
+    "zod": "^3.24.1"
+  }
+}

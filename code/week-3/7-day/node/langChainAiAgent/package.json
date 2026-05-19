@@ -1,0 +1,20 @@
+{
+  "name": "demo-ai-agent",
+  "version": "1.0.0",
+  "description": "Demo AI Agent",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "node --watch main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@langchain/core": "^1.1.40",
+    "@langchain/openai": "^1.4.4",
+    "langchain": "^1.3.3",
+    "zod": "^4.3.6"
+  }
+}

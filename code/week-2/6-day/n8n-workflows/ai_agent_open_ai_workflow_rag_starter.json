@@ -1,0 +1,292 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload your data to test RAG",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload your file(s)",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf, .csv, .txt",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d4c92874-7e6c-491a-9e93-5f857fd39d85",
+      "name": "Upload your file here",
+      "type": "n8n-nodes-base.formTrigger",
+      "position": [
+        1056,
+        -32
+      ],
+      "webhookId": "90b3ce0f-cae8-4b3c-a3e1-0e00a87603c9",
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "model": "openai/text-embedding-3-large",
+        "options": {}
+      },
+      "id": "8fccaa7e-a896-44b7-b47b-16a45a56f28d",
+      "name": "Embeddings OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "position": [
+        1696,
+        448
+      ],
+      "typeVersion": 1.2,
+      "credentials": {
+        "openAiApi": {
+          "id": "SKyvXEpn7akpT06y",
+          "name": "OpenAi Demo Cred"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "id": "1f8a8cb6-af65-4f57-99c0-f4044b12866e",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "position": [
+        1504,
+        128
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "content": "### Readme:\nЗагрузите свои данные в векторную базу данных с помощью потока 📚 **Загрузка данных**, а затем используйте эти данные в качестве контекста чата с помощью потока 🐕 **Извлечение данных**.\n\n**Быстрый старт**\n1. Нажмите кнопку «Выполнить рабочий процесс», чтобы запустить поток 📚 **Загрузка данных**.\n\n2. Нажмите кнопку «Открыть чат», чтобы запустить поток 🐕 **Извлечение данных**. Затем задайте вопрос о содержимом ваших документов.",
+        "height": 300,
+        "width": 440,
+        "color": 4
+      },
+      "id": "a85a4c9f-92d4-4077-99fa-566f39738eb8",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        512,
+        -96
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### 1. Загрузка потока данных",
+        "height": 460,
+        "width": 700,
+        "color": 7
+      },
+      "id": "68bc4a1b-bd5d-452b-b471-63346aa9f69f",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        992,
+        -96
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key",
+          "cachedResultName": "vector_store_key"
+        }
+      },
+      "id": "d5546e40-7291-4249-b0d7-7b9a1bb6426b",
+      "name": "Insert Data to Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "position": [
+        1232,
+        -32
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "knowledge_base",
+        "toolDescription": "Use this knowledge base to answer questions from the user",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "id": "b51eb946-4e72-453a-99e9-ff8d29536796",
+      "name": "Query Data Tool",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "position": [
+        2176,
+        256
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0926e699-6671-44c0-8cea-29b5cd6d80b9",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        2112,
+        -64
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7a6da03d-0a9a-4c37-9460-f69b6e81912f",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        1904,
+        -64
+      ],
+      "webhookId": "4091fa09-fb9a-4039-9411-7104d213f601",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "a566fac5-6328-444e-8fa8-f7d697d8edaa",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        1904,
+        176
+      ],
+      "typeVersion": 1.2,
+      "credentials": {
+        "openAiApi": {
+          "id": "SKyvXEpn7akpT06y",
+          "name": "OpenAi Demo Cred"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### 2. Взаимодействие с данными",
+        "height": 460,
+        "width": 680,
+        "color": 7
+      },
+      "id": "8cb1e06e-7367-4a15-9f7e-28b462e68767",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1776,
+        -96
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Query Data Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Query Data Tool",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload your file here": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1
+  },
+  "versionId": "b622e4b9-bf3a-4e78-9503-1ef9122d5124",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b68d0d63a3329edfb7c6361e26dbd7f08f814484813175415777752dcb23c39b"
+  },
+  "id": "xSoHD0mAkqyklqkJ",
+  "tags": []
+}

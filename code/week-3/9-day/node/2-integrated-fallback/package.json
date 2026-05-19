@@ -1,0 +1,18 @@
+{
+  "name": "integrated-fallback",
+  "version": "1.0.0",
+  "description": "LangGraph integrated fallback example — каскадная резервная обработка",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "demo": "node index.js \"Что такое машинное обучение?\""
+  },
+  "dependencies": {
+    "@langchain/langgraph": "^1.2.0",
+    "@langchain/openai": "^1.2.12",
+    "@langchain/community": "^1.1.22",
+    "@langchain/core": "^1.1.30",
+    "dotenv": "^16.4.5",
+    "zod": "^3.23.8"
+  }
+}
